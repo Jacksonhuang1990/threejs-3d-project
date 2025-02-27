@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>Thanks for your support</h3>
             <div class="qr-container">
                 <div class="qr-code">
-                    <img src="assets/wechat-qr.jpg" alt="Wechat Pay" />
+                    <img src="/assets/wechat-qr.jpg" alt="Wechat Pay" />
                     <p>Wechat Pay</p>
                 </div>
                 <div class="qr-code">
-                    <img src="assets/alipay-qr.jpg" alt="Alipay" />
+                    <img src="/assets/alipay-qr.jpg" alt="Alipay" />
                     <p>Alipay</p>
                 </div>
             </div>

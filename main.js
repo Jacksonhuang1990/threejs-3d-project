@@ -13,36 +13,36 @@ const gui = new dat.GUI()
 
 // 添加TextureLoader
 const textureLoader = new THREE.TextureLoader();
-const swiftNormalTexture = textureLoader.load('./texture/swift-normal.png');
+const swiftNormalTexture = textureLoader.load('/texture/swift-normal.png');
 swiftNormalTexture.flipY = false;
 swiftNormalTexture.wrapS = THREE.RepeatWrapping;
 swiftNormalTexture.wrapT = THREE.RepeatWrapping;
 const CONFIG = {
     models: {
         birkin: {
-            path: './model/birkin.gltf',
+            path: '/model/birkin.gltf',
             scale: 2,
             availableMaterials: ['swift', 'togo', 'chevre', 'ostrich', 'alligator']
         },
         kelly: {
-            path: './model/kelly.gltf',
+            path: '/model/kelly.gltf',
             scale: 2,
             availableMaterials: ['epsom', 'chevre', 'ostrich']
         },
         minikelly2: {
-            path: './model/minikelly2.gltf',
+            path: '/model/minikelly2.gltf',
             scale: 2,
             availableMaterials: ['epsom', 'swift', 'ostrich', 'alligator']
         },
         kellypochette: {
-            path: './model/kellypochette.gltf',
+            path: '/model/kellypochette.gltf',
             scale: 2,
             availableMaterials: ['swift']
         }
     },
     materials: {
         swift: {
-            normalMap: './texture/swift-normal.png',
+            normalMap: '/texture/swift-normal.png',
             roughness: 0.65,
             availableColors: {
                 body: ['8L BETON', '4B BISCUIT', '37 GOLD', 'D0 BEIGE DE WERMAR', '89 NOIR', 'V0 VERT ROUSSEAU', '3Y CABAN', '46 EBENE', 'I7 BLEU ZELLIGE', '0L GRIS MEYER', '3I VERT CRIQUET'],
@@ -50,7 +50,7 @@ const CONFIG = {
             }
         },
         togo: {
-            normalMap: './texture/togo-normal.png',
+            normalMap: '/texture/togo-normal.png',
             roughness: 0.7,
             availableColors: {
                 body: ['10 CRAIE', '80 GREIS PERLE', '8F GRIS ETAIN', '21 NATUREL-SABLE', '4B BISCUIT', '89 NOIR', 'V0 VERT ROUSSEAU', '2Z BLEU NUIT', '0G ROUGE SELLIER', '73 BLEU SAPHIR', '0L GRIS MEYER'],
@@ -58,7 +58,7 @@ const CONFIG = {
             }
         },
         ostrich: {
-            normalMap: './texture/ostrich-normal.png',
+            normalMap: '/texture/ostrich-normal.png',
             roughness: 0.6,
             availableColors: {
                 body: ['3C PARCHEMIN', '3S COGNAC', '81 GRIS TOURTERELLE', '89 NOIR', '6O VERT CYPRES', 'S4 DEEP BLUE', 'U1 VERT VERONE', '8U BLEU GLACIER'],
@@ -66,7 +66,7 @@ const CONFIG = {
             }
         },
         epsom: {
-            normalMap: './texture/epsom-normal.png',
+            normalMap: '/texture/epsom-normal.png',
             roughness: 0.5,
             availableColors: {
                 body: ['10 CRAIE', '4B BISCUIT', '37 GOLD', '89 NOIR', '73 BLEU SAPHIR', '6O VERT CYPRES', '0G ROUGE SELLIER', '7N BLEU ELECTE', '0L GRIS MEYER', 'O6 VERT ADE'],
@@ -74,7 +74,7 @@ const CONFIG = {
             }
         },
         chevre: {
-            normalMap: './texture/chevre-normal.png',
+            normalMap: '/texture/chevre-normal.png',
             roughness: 0.5,
             availableColors: {
                 body: ['12 NATA', '18 ETOUPE', '2H KRAFT', '36 BRIQUE', '28 CARAMEL', '89 NOIR', '55 ROUGE H', 'S4 DEEP BLUE', '7U BLEU NAVY', '71 BLEU FRANCE', '3I VERT CRIQUET'],
@@ -82,7 +82,7 @@ const CONFIG = {
             }
         },
         alligator: {
-            normalMap: './texture/alligator-normal.png',
+            normalMap: '/texture/alligator-normal.png',
             roughness: 0.8,
             specular: 0.1,
             availableColors: {
