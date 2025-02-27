@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { CONFIG } from './config.js';
+import { CONFIG } from '/config.js';
 
 export class ModelManager {
     constructor(scene) {
