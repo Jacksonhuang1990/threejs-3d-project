@@ -1,0 +1,75 @@
+{
+  "models": {
+    "birkin": {
+      "name": "BIRKIN",
+      "path": "./models/birkin.gltf",
+      "scale": 2,
+      "availableMaterials": ["togo", "ostrich", "epsom", "swift", "alligator"]
+    },
+    "kelly": {
+      "name": "KELLY",
+      "path": "./models/kelly.gltf",
+      "scale": 2,
+      "availableMaterials": ["togo", "ostrich", "epsom", "swift", "alligator"]
+    },
+    "minikelly2": {
+      "name": "MINIKELLY 2",
+      "path": "./models/minikelly2.gltf",
+      "scale": 2,
+      "availableMaterials": ["togo", "ostrich", "epsom", "swift", "alligator"]
+    },
+    "kellypochette": {
+      "name": "KELLY POCHETTE",
+      "path": "./models/kellypochette.gltf",
+      "scale": 2,
+      "availableMaterials": ["togo", "ostrich", "epsom", "swift", "alligator"]
+    }
+  },
+  "materials": {
+    "togo": {
+      "name": "TOGO",
+      "normalMap": "./textures/togo-normal.png",
+      "availableColors": ["Rose Sakura", "Gold", "Noir", "Etoupe", "Bleu Lin"]
+    },
+    "ostrich": {
+      "name": "OSTRICH",
+      "normalMap": "./textures/ostrich-normal.png",
+      "availableColors": ["Rose Sakura", "Gold", "Noir", "Etoupe"]
+    },
+    "epsom": {
+      "name": "EPSOM",
+      "normalMap": "./textures/epsom-normal.png",
+      "availableColors": ["Rose Sakura", "Gold", "Noir", "Etoupe", "Bleu Lin"]
+    },
+    "swift": {
+      "name": "SWIFT",
+      "normalMap": "./textures/swift-normal.png",
+      "availableColors": ["Rose Sakura", "Gold", "Noir", "Etoupe"]
+    },
+    "alligator": {
+      "name": "ALLIGATOR",
+      "normalMap": "./textures/alligator-normal.png",
+      "availableColors": ["Rose Sakura", "Gold", "Noir"]
+    }
+  },
+  "colors": {
+    "body": [
+      { "name": "Rose Sakura", "hex": "#FFB7C5" },
+      { "name": "Gold", "hex": "#D4AF37" },
+      { "name": "Noir", "hex": "#000000" },
+      { "name": "Etoupe", "hex": "#8B7355" },
+      { "name": "Bleu Lin", "hex": "#7B90AD" }
+    ],
+    "hardware": [
+      { "name": "Palladium", "hex": "#DADADA" },
+      { "name": "Gold", "hex": "#D4AF37" },
+      { "name": "Rose Gold", "hex": "#B76E79" }
+    ],
+    "lining": [
+      { "name": "Craie", "hex": "#E8E6D9" },
+      { "name": "Gold", "hex": "#D4AF37" },
+      { "name": "Rose Pourpre", "hex": "#C0447C" },
+      { "name": "Bleu Lin", "hex": "#7B90AD" }
+    ]
+  }
+}

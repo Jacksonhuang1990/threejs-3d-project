@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Handbag Customization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="assets/intro.js"></script>
+    <script src="assets/donate.js"></script>
+</head>
+<body>
+    <!-- 开场动画遮罩层 -->
+    <div class="intro-overlay">
+        <button class="intro-button">
+            <img src="assets/logo.svg" alt="Brand Logo" class="logo-image">
+        </button>
+    </div>
+    <div class="main-container">
+        <div class="product-viewer">
+            <!-- 左侧模型选择区域 -->
+            <div class="model-selector">
+                <h2>BAG STYLE</h2>
+                <div class="bag-buttons">
+                    <button class="model-btn" data-model="birkin">BIRKIN</button>
+                    <button class="model-btn" data-model="kelly">KELLY</button>
+                    <button class="model-btn" data-model="minikelly2">MINIKELLY 2</button>
+                    <button class="model-btn" data-model="kellypochette">KELLY POCHETTE</button>
+                </div>
+            </div>
+
+            <!-- 中间3D展示区域 -->
+            <div class="canvas-container">
+                <canvas class="webgl"></canvas>
+            </div>
+
+            <!-- 右侧定制面板 -->
+            <div class="customization-panel">
+                <!-- 材质选择区域 -->
+                <div class="material-section">
+                    <h2>LEATHER</h2>
+                    <div class="material-options">
+                        <button class="material-btn" data-material="swift">Swift</button>
+                        <button class="material-btn" data-material="togo">TOGO</button>
+                        <button class="material-btn" data-material="ostrich">Ostrich</button>
+                        <button class="material-btn" data-material="epsom">Epsom</button>
+                        <button class="material-btn" data-material="chevre">Chevre Mysore</button>
+                        <button class="material-btn" data-material="alligator">Matte Alligator</button>
+                    </div>
+                </div>
+
+                <!-- 颜色选择区域 -->
+                <div class="color-section">
+                    <h2>COLOR</h2>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="body">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Body Color</span>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="accent">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Accent Color</span>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="hardware">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Hardware Color</span>
+                    </div>
+                </div>
+
+                <!-- 内衬控制系统 -->
+                <div class="linings-section">
+                    <h2>STITCHING</h2>
+                    <div class="linings-option">
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="linings-checkbox" data-mode="normal">
+                            <span class="checkmark"></span>
+                        </label>
+                        <span>Stitching Normal</span>
+                    </div>
+                    <div class="linings-option">
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="linings-checkbox" data-mode="verso">
+                            <span class="checkmark"></span>
+                        </label>
+                        <span>Stitching Verso</span>
+                    </div>
+                    <div class="linings-option">
+                        <div class="color-picker" data-color="linings">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Stitching Color</span>
+                    </div>
+                </div>
+                <!-- 捐赠按钮和二维码模态框 -->
+                <div class="donate-section">
+                    <button class="donate-btn">DONATE</button>
+                    <span class="donate-text">Donation will be used for WEB's future update.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

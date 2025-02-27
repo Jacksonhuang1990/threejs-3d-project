@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置管理</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .section-title { margin-top: 2rem; }
+        .color-preview {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">配置管理系统</h1>
+        
+        <div class="alert alert-success d-none" id="saveSuccess">保存成功！</div>
+        <div class="alert alert-danger d-none" id="saveError">保存失败，请重试！</div>
+
+        <div class="accordion" id="configAccordion">
+            <!-- 包型配置 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="modelsHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#modelsCollapse">
+                        包型配置
+                    </button>
+                </h2>
+                <div id="modelsCollapse" class="accordion-collapse collapse show" data-bs-parent="#configAccordion">
+                    <div class="accordion-body" id="modelsConfig"></div>
+                </div>
+            </div>
+
+            <!-- 材质配置 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="materialsHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#materialsCollapse">
+                        材质配置
+                    </button>
+                </h2>
+                <div id="materialsCollapse" class="accordion-collapse collapse" data-bs-parent="#configAccordion">
+                    <div class="accordion-body" id="materialsConfig"></div>
+                </div>
+            </div>
+
+            <!-- 颜色配置 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="colorsHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colorsCollapse">
+                        颜色配置
+                    </button>
+                </h2>
+                <div id="colorsCollapse" class="accordion-collapse collapse" data-bs-parent="#configAccordion">
+                    <div class="accordion-body">
+                        <div id="bodyColors" class="mb-4">
+                            <h4>主体颜色</h4>
+                            <div id="bodyColorsConfig"></div>
+                            <button class="btn btn-sm btn-primary mt-2" onclick="addColor('body')">添加颜色</button>
+                        </div>
+
+                        <div id="hardwareColors" class="mb-4">
+                            <h4>五金件颜色</h4>
+                            <div id="hardwareColorsConfig"></div>
+                            <button class="btn btn-sm btn-primary mt-2" onclick="addColor('hardware')">添加颜色</button>
+                        </div>
+
+                        <div id="liningColors">
+                            <h4>内衬颜色</h4>
+                            <div id="liningColorsConfig"></div>
+                            <button class="btn btn-sm btn-primary mt-2" onclick="addColor('lining')">添加颜色</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-4">
+            <button class="btn btn-primary" onclick="saveConfig()">保存配置</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let config = null;
+
+        // 加载配置
+        async function loadConfig() {
+            try {
+                const response = await fetch('config.json');
+                config = await response.json();
+                renderConfig();
+            } catch (error) {
+                console.error('加载配置失败:', error);
+            }
+        }
+
+        // 渲染配置
+        function renderConfig() {
+            renderModels();
+            renderMaterials();
+            renderColors();
+        }
+
+        // 渲染包型配置
+        function renderModels() {
+            const container = document.getElementById('modelsConfig');
+            container.innerHTML = '';
+
+            for (const [modelId, model] of Object.entries(config.models)) {
+                const modelDiv = document.createElement('div');
+                modelDiv.className = 'mb-3';
+                modelDiv.innerHTML = `
+                    <h5>${model.name}</h5>
+                    <div class="materials-selection">
+                        ${Object.keys(config.materials).map(materialId => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" 
+                                    id="${modelId}_${materialId}" 
+                                    ${model.availableMaterials.includes(materialId) ? 'checked' : ''}
+                                    onchange="updateModelMaterials('${modelId}', '${materialId}', this.checked)">
+                                <label class="form-check-label" for="${modelId}_${materialId}">
+                                    ${config.materials[materialId].name}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(modelDiv);
+            }
+        }
+
+        // 渲染材质配置
+        function renderMaterials() {
+            const container = document.getElementById('materialsConfig');
+            container.innerHTML = '';
+
+            for (const [materialId, material] of Object.entries(config.materials)) {
+                const materialDiv = document.createElement('div');
+                materialDiv.className = 'mb-4';
+                materialDiv.innerHTML = `
+                    <h5>${material.name}</h5>
+                    <div class="available-colors">
+                        <h6>可选颜色：</h6>
+                        ${config.colors.body.map(color => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" 
+                                    id="${materialId}_${color.name.replace(/\s+/g, '_')}" 
+                                    ${material.availableColors.includes(color.name) ? 'checked' : ''}
+                                    onchange="updateMaterialColors('${materialId}', '${color.name}', this.checked)">
+                                <label class="form-check-label" for="${materialId}_${color.name.replace(/\s+/g, '_')}">
+                                    <span class="color-preview" style="background-color: ${color.hex}"></span>
+                                    ${color.name}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(materialDiv);
+            }
+        }
+
+        // 渲染颜色配置
+        function renderColors() {
+            renderColorSection('body', 'bodyColorsConfig');
+            renderColorSection('hardware', 'hardwareColorsConfig');
+            renderColorSection('lining', 'liningColorsConfig');
+        }
+
+        function renderColorSection(section, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            config.colors[section].forEach((color, index) => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'mb-2 d-flex align-items-center';
+                colorDiv.innerHTML = `
+                    <span class="color-preview" style="background-color: ${color.hex}"></span>
+                    <input type="text" class="form-control form-control-sm me-2" style="width: 150px"
+                        value="${color.name}" onchange="updateColorName('${section}', ${index}, this.value)">
+                    <input type="color" class="form-control form-control-sm me-2" style="width: 100px"
+                        value="${color.hex}" onchange="updateColorHex('${section}', ${index}, this.value)">
+                    <button class="btn btn-sm btn-danger" onclick="removeColor('${section}', ${index})">删除</button>
+                `;
+                container.appendChild(colorDiv);
+            });
+        }
+
+        // 更新包型可用材质
+        function updateModelMaterials(modelId, materialId, checked) {
+            if (checked) {
+                if (!config.models[modelId].availableMaterials.includes(materialId)) {
+                    config.models[modelId].availableMaterials.push(materialId);
+                }
+            } else {
+                config.models[modelId].availableMaterials = config.models[modelId].availableMaterials
+                    .filter(m => m !== materialId);
+            }
+        }
+
+        // 更新材质可用颜色
+        function updateMaterialColors(materialId, colorName, checked) {
+            if (checked) {
+                if (!config.materials[materialId].availableColors.includes(colorName)) {
+                    config.materials[materialId].availableColors.push(colorName);
+                }
+            } else {
+                config.materials[materialId].availableColors = config.materials[materialId].availableColors
+                    .filter(c => c !== colorName);
+            }
+        }
+
+        // 更新颜色名称
+        function updateColorName(section, index, newName) {
+            const oldName = config.colors[section][index].name;
+            config.colors[section][index].name = newName;
+
+            // 更新材质中的颜色引用
+            Object.values(config.materials).forEach(material => {
+                const colorIndex = material.availableColors.indexOf(oldName);
+                if (colorIndex !== -1) {
+                    material.availableColors[colorIndex] = newName;
+                }
+            });
+
+            renderMaterials(); // 重新渲染材质配置以更新显示
+        }
+
+        // 更新颜色值
+        function updateColorHex(section, index, newHex) {
+            config.colors[section][index].hex = newHex;
+        }
+
+        // 添加新颜色
+        function addColor(section) {
+            config.colors[section].push({
+                name: '新颜色',
+                hex: '#000000'
+            });
+            renderColorSection(section, `${section}ColorsConfig`);
+        }
+
+        // 删除颜色
+        function removeColor(section, index) {
+            const colorName = config.colors[section][index].name;
+
+            // 从材质的可用颜色中移除
+            Object.values(config.materials).forEach(material => {
+                material.availableColors = material.availableColors.filter(c => c !== colorName);
+            });
+
+            config.colors[section].splice(index, 1);
+            renderColorSection(section, `${section}ColorsConfig`);
+            renderMaterials(); // 重新渲染材质配置以更新显示
+        }
+
+        // 保存配置
+        async function saveConfig() {
+            try {
+                const response = await fetch('save_config.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(config)
+                });
+
+                if (response.ok) {
+                    showMessage('saveSuccess');
+                } else {
+                    showMessage('saveError');
+                }
+            } catch (error) {
+                console.error('保存配置失败:', error);
+                showMessage('saveError');
+            }
+        }
+
+        // 显示消息
+        function showMessage(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.remove('d-none');
+            setTimeout(() => {
+                element.classList.add('d-none');
+            }, 3000);
+        }
+
+        // 页面加载时获取配置
+        document.addEventListener('DOMContentLoaded', loadConfig);
+    </script>
+</body>
+</html>
