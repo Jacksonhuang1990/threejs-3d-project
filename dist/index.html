@@ -1,15 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			
-			body { margin: 0; };
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Handbag Customization</title>
+    <script src="assets/intro.js"></script>
+    <script src="assets/donate.js"></script>
+  <script type="module" crossorigin src="/assets/index-BbCt-p79.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D2DOksuK.css">
+</head>
+<body>
+    <!-- 开场动画遮罩层 -->
+    <div class="intro-overlay">
+        <button class="intro-button">
+            <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='iso-8859-1'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill='%23000000'%20height='800px'%20width='800px'%20version='1.1'%20id='Capa_1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20viewBox='0%200%20486.025%20486.025'%20xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath%20d='M420.725,85.413c-42.1-42.1-98.1-65.3-157.6-65.3c-60.6,0-117.3,23.9-159.6,67.3c-4.6,4.7-4.5,12.3,0.2,17%20c4.7,4.6,12.3,4.5,17-0.2c37.8-38.7,88.3-60,142.4-60c109.7-0.1,198.9,89.1,198.9,198.8s-89.2,198.9-198.9,198.9%20s-198.9-89.2-198.9-198.9v-2.5l19.8,19.8c2.3,2.3,5.4,3.5,8.5,3.5s6.1-1.2,8.5-3.5c4.7-4.7,4.7-12.3,0-17l-40.2-40.3%20c-4.7-4.7-12.3-4.7-17,0l-40.3,40.3c-4.7,4.7-4.7,12.3,0,17c2.3,2.3,5.4,3.5,8.5,3.5s6.1-1.2,8.5-3.5l19.8-19.8v2.5%20c0,59.5,23.2,115.5,65.3,157.6s98.1,65.3,157.6,65.3s115.5-23.2,157.6-65.3s65.2-98.1,65.2-157.6S462.825,127.513,420.725,85.413z%20'/%3e%3cpath%20d='M263.125,113.413c-39,0-70.7,31.7-70.7,70.7v34.1h-22c-6.6,0-12,5.4-12,12v119.7c0,6.6,5.4,12,12,12h185.5%20c6.6,0,12-5.4,12-12v-119.6c0-6.6-5.4-12-12-12h-22v-34.1C333.925,145.213,302.125,113.413,263.125,113.413z%20M216.425,184.213%20c0-25.8,21-46.7,46.7-46.7s46.7,21,46.7,46.7v34.1h-93.4L216.425,184.213L216.425,184.213z%20M343.925,337.913h-161.5v-95.7h161.5%20V337.913z'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e" alt="Brand Logo" class="logo-image">
+        </button>
+    </div>
+    <div class="main-container">
+        <div class="product-viewer">
+            <!-- 左侧模型选择区域 -->
+            <div class="model-selector">
+                <h2>BAG STYLE</h2>
+                <div class="bag-buttons">
+                    <button class="model-btn" data-model="birkin">BIRKIN</button>
+                    <button class="model-btn" data-model="kelly">KELLY</button>
+                    <button class="model-btn" data-model="minikelly2">MINIKELLY 2</button>
+                    <button class="model-btn" data-model="kellypochette">KELLY POCHETTE</button>
+                </div>
+            </div>
 
-		</style>
-		<script type="module" crossorigin src="/assets/index-B2cAQhkg.js"></script>
-	</head>
-	<body>
-	</body>
+            <!-- 中间3D展示区域 -->
+            <div class="canvas-container">
+                <canvas class="webgl"></canvas>
+            </div>
+
+            <!-- 右侧定制面板 -->
+            <div class="customization-panel">
+                <!-- 材质选择区域 -->
+                <div class="material-section">
+                    <h2>LEATHER</h2>
+                    <div class="material-options">
+                        <button class="material-btn" data-material="swift">Swift</button>
+                        <button class="material-btn" data-material="togo">TOGO</button>
+                        <button class="material-btn" data-material="ostrich">Ostrich</button>
+                        <button class="material-btn" data-material="epsom">Epsom</button>
+                        <button class="material-btn" data-material="chevre">Chevre Mysore</button>
+                        <button class="material-btn" data-material="alligator">Matte Alligator</button>
+                    </div>
+                </div>
+
+                <!-- 颜色选择区域 -->
+                <div class="color-section">
+                    <h2>COLOR</h2>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="body">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Body Color</span>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="accent">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Accent Color</span>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-picker" data-color="hardware">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Hardware Color</span>
+                    </div>
+                </div>
+
+                <!-- 内衬控制系统 -->
+                <div class="linings-section">
+                    <h2>STITCHING</h2>
+                    <div class="linings-option">
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="linings-checkbox" data-mode="normal">
+                            <span class="checkmark"></span>
+                        </label>
+                        <span>Stitching Normal</span>
+                    </div>
+                    <div class="linings-option">
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="linings-checkbox" data-mode="verso">
+                            <span class="checkmark"></span>
+                        </label>
+                        <span>Stitching Verso</span>
+                    </div>
+                    <div class="linings-option">
+                        <div class="color-picker" data-color="linings">
+                            <div class="color-preview"></div>
+                        </div>
+                        <span>Stitching Color</span>
+                    </div>
+                </div>
+                <!-- 捐赠按钮和二维码模态框 -->
+                <div class="donate-section">
+                    <button class="donate-btn">DONATE</button>
+                    <span class="donate-text">Donation will be used for WEB's future update.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
