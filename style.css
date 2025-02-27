@@ -28,9 +28,11 @@ body {
     grid-template-columns: minmax(180px, 200px) 1fr minmax(250px, 300px);
     gap: 1rem;
     padding: 1rem;
-    height: 100%;
+    height: 100vh;
     box-sizing: border-box;
     min-height: 0;
+    position: relative;
+    z-index: 0;
 }
 
 /* 模型选择区域样式 */
@@ -250,10 +252,10 @@ body {
 /* 保持其他现有样式不变 */
 .canvas-container {
     position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     min-height: 450px;
-    background: linear-gradient(to bottom, #676666, #444444);
     border-radius: 8px;
     overflow: visible;
 }
@@ -262,8 +264,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100% !important; /* 强制宽度100% */
-    height: 100% !important; /* 强制高度100% */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     outline: none;
 }
 
@@ -279,6 +282,7 @@ body {
     box-sizing: border-box;
     margin-bottom: 50px;
     margin-top: 2rem;
+    z-index: 0;
 }
 
 .material-section {
@@ -552,34 +556,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -587,14 +595,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -912,34 +921,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -947,14 +960,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -1217,34 +1231,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -1252,14 +1270,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -1522,34 +1541,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -1557,14 +1580,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -1827,34 +1851,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -1862,14 +1890,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -2132,34 +2161,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -2167,14 +2200,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -2437,34 +2471,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -2472,14 +2510,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -2742,34 +2781,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -2777,14 +2820,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {
@@ -3047,34 +3091,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .qr-modal-content {
-    background-color: white;
-    padding: 2rem;
+    background-color: #1a1a1a;
+    padding: 20px;
     border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    color: #fff;
     text-align: center;
-    max-width: 90%;
-    width: 400px;
 }
 
 .close-modal {
     position: absolute;
-    right: 1rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #fff;
 }
 
 .qr-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.5rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .qr-code {
@@ -3082,14 +3130,15 @@ body {
 }
 
 .qr-code img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 0.5rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .qr-code p {
     margin: 0;
-    color: #666;
+    color: #fff;
 }
 
 .donate-btn {

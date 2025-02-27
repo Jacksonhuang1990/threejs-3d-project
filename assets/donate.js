@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     `;
+    // 确保模态框始终位于最顶层
     document.body.appendChild(modal);
+    modal.style.zIndex = '9999';
 
     // 获取关闭按钮和模态框元素
     const closeBtn = modal.querySelector('.close-modal');
