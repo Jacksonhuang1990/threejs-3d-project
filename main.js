@@ -11,8 +11,12 @@ import { TextureLoader } from 'three';
 //gui
 const gui = new dat.GUI()
 
+// 添加加载管理器
+const loadingManager = new THREE.LoadingManager() ;
+const loader = new GLTFLoader (loadingManager);
+
 // 添加TextureLoader
-const textureLoader = new THREE.TextureLoader();
+const textureLoader = new THREE.TextureLoader(loadingManager);
 const swiftNormalTexture = textureLoader.load('/texture/swift-normal.png');
 swiftNormalTexture.flipY = false;
 swiftNormalTexture.wrapS = THREE.RepeatWrapping;
@@ -527,6 +531,29 @@ function initializeEventListeners() {
         });
     });
 
+const loadingElement = document.createElement('div');
+loadingElement.className = 'loading-screen';
+loadingElement.innerHTML = `
+    <div class="loading-progress">
+        <div class="progress-bar"></div>
+        <div class="progress-text">Loading... 0%</div>
+    </div>
+`;
+document.body.appendChild(loadingElement);
+
+// 设置加载管理器回调
+loadingManager.onProgress = (url, loaded, total) => {
+    const progress = (loaded / total) * 100;
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.progress-text');
+    if (progressBar) progressBar.style.width = progress + '%';
+    if (progressText) progressText.textContent = `Loading... ${Math.round(progress)}%`;
+};
+
+loadingManager.onLoad = () => {
+    loadingElement.style.display = 'none';
+};
+
     // 捐赠按钮事件
     const donateBtn = document.querySelector('.donate-btn');
     const qrPanel = document.createElement('div');
@@ -652,7 +679,6 @@ function updateColor(colorType, hexColor) {
 }
 
 // 添加loadModel函数
-const loader = new GLTFLoader();
 function loadModel(modelType) {
     // 更新材质按钮状态
     const availableMaterials = CONFIG.models[modelType].availableMaterials;
@@ -671,7 +697,6 @@ function loadModel(modelType) {
     });
 
     // 加载新模型
-    const loader = new GLTFLoader();
     loader.load(CONFIG.models[modelType].path, (gltf) => {
         // 移除当前模型（如果存在）
         scene.children.forEach((child) => {
