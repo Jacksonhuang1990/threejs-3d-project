@@ -549,7 +549,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -565,8 +566,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -906,7 +908,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -922,8 +925,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -1208,7 +1212,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -1224,8 +1229,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -1510,7 +1516,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -1526,8 +1533,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -1812,7 +1820,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -1828,8 +1837,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -2114,7 +2124,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -2130,8 +2141,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -2416,7 +2428,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -2432,8 +2445,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -2718,7 +2732,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -2734,8 +2749,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
@@ -3020,7 +3036,8 @@ body {
     display: none;
     position: absolute;
     bottom: 100%;
-    left: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -3036,8 +3053,9 @@ body {
 
 .qr-container {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    justify-content: center;
+    align-items: center;
 }
 
 .qr-code {
