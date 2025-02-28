@@ -1,3 +1,4 @@
+// ... 其他代码保持不变 ...
 // 等待DOM加载完成
 document.addEventListener('DOMContentLoaded', () => {
     const donateBtn = document.querySelector('.donate-btn');
@@ -5,26 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // 创建模态框
     const modal = document.createElement('div');
     modal.className = 'qr-modal';
-    modal.innerHTML = `
+    
+    // 使用模板字符串创建HTML内容
+    const modalContent = `
         <div class="qr-modal-content">
             <span class="close-modal">&times;</span>
             <h3>Thanks for your support</h3>
             <div class="qr-container">
                 <div class="qr-code">
-                    <img src="/assets/wechat-qr.jpg" alt="Wechat Pay" />
+                    <img src="/static/wechat-qr.jpg" alt="Wechat Pay" />
                     <p>Wechat Pay</p>
                 </div>
                 <div class="qr-code">
-                    <img src="/assets/alipay-qr.jpg" alt="Alipay" />
+                    <img src="/static/alipay-qr.jpg" alt="Alipay" />
                     <p>Alipay</p>
                 </div>
             </div>
         </div>
     `;
-    // 确保模态框始终位于最顶层
-    document.addEventListener('load', () => {
-        document.body.appendChild(modal);
-    }, true);
+    
+    // 设置模态框的HTML内容
+    modal.innerHTML = modalContent;
+    document.body.appendChild(modal);
 
     // 获取关闭按钮和模态框元素
     const closeBtn = modal.querySelector('.close-modal');
