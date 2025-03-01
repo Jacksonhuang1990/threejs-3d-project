@@ -28,7 +28,7 @@ const CONFIG = {
         minikelly2: {
             path: '/model/minikelly2.gltf',
             scale: 2,
-            availableMaterials: ['epsom', 'swift', 'ostrich', 'alligator']
+            availableMaterials: ['chevre', 'epsom', 'swift', 'ostrich', 'alligator']
         },
         kellypochette: {
             path: '/model/kellypochette.gltf',
