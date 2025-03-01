@@ -2,14 +2,6 @@ import '/style.css';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import gsap from 'gsap';
-import * as dat from 'dat.gui';
-import { Material } from 'three';
-import { TextureLoader } from 'three';
-
-
-//gui
-const gui = new dat.GUI()
 
 // 添加加载管理器
 const loadingManager = new THREE.LoadingManager() ;
@@ -256,16 +248,6 @@ const container = document.querySelector(".canvas-container");
 // 场景设置
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
-
-//camera
-// 移除重复的相机定义
-// const camera = new THREE.PerspectiveCamera( 50, canvas.clientWidth / canvas.clientHeight, 0.001, 1000 );
-// camera.position.z = 1;
-// camera.position.x = 0.1;
-// camera.position.y = -0.4;
-// camera.rotation.x = 3.14/2/90*20;
-// camera.rotation.y = 3.14/2/90*6.5;
-// scene.add(camera);
 
 // 相机设置
 const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -589,61 +571,29 @@ function updateMaterial(materialType) {
     const materialConfig = CONFIG.materials[materialType];
     if (!materialConfig) return;
 
+    // 创建材质配置映射，避免重复的 if-else
+    const materialSettings = {
+        'ostrich': { repeat: [1.5, 1.5], normalScale: [0.4, 0.4] },
+        'togo': { repeat: [2.5, 2.5], normalScale: [0.5, 0.5] },
+        'epsom': { repeat: [1.7, 1.7], normalScale: [6, 6] },
+        'chevre': { repeat: [2, 2], normalScale: [0.8, 0.8] },
+        'alligator': { repeat: [0.7, 0.7], normalScale: [0.6, 0.6] },
+        'default': { repeat: [1, 1], normalScale: [1, 1] }
+    };
+
+    const settings = materialSettings[materialType] || materialSettings.default;
     const normalMap = textureLoader.load(materialConfig.normalMap);
     normalMap.flipY = false;
     normalMap.wrapS = THREE.RepeatWrapping;
     normalMap.wrapT = THREE.RepeatWrapping;
+    normalMap.repeat.set(...settings.repeat);
 
-    // 为特定材质设置不同的缩放
-    if (materialType === 'ostrich') {
-        normalMap.repeat.set(1.5, 1.5); // 增加 ostrich 材质的重复次数
-        [bodyMaterial, accentsMaterial].forEach(material => {
-            material.normalMap = normalMap;
-            material.roughness = materialConfig.roughness;
-            material.normalScale.set(0.4, 0.4); // 减小 ostrich 材质的法线强度
-            material.needsUpdate = true;
-        });
-    } else if (materialType === 'togo') {
-            normalMap.repeat.set(2.5, 2.5); // 增加 ostrich 材质的重复次数
-            [bodyMaterial, accentsMaterial].forEach(material => {
-                material.normalMap = normalMap;
-                material.roughness = materialConfig.roughness;
-                material.normalScale.set(0.5, 0.5); // 减小 ostrich 材质的法线强度
-                material.needsUpdate = true;
-            });   
-     } else if (materialType === 'epsom') {
-            normalMap.repeat.set(1.7, 1.7); // 增加 ostrich 材质的重复次数
-            [bodyMaterial, accentsMaterial].forEach(material => {
-                material.normalMap = normalMap;
-                material.roughness = materialConfig.roughness;
-                material.normalScale.set(6, 6); // 减小 ostrich 材质的法线强度
-                material.needsUpdate = true;
-            });  
-     } else if (materialType === 'chevre') {
-            normalMap.repeat.set(2, 2); // 增加 ostrich 材质的重复次数
-            [bodyMaterial, accentsMaterial].forEach(material => {
-                material.normalMap = normalMap;
-                material.roughness = materialConfig.roughness;
-                material.normalScale.set(0.8, 0.8); // 减小 ostrich 材质的法线强度
-                material.needsUpdate = true;
-            });  
-    } else if (materialType === 'alligator') {
-            normalMap.repeat.set(0.7, 0.7); // 增加 ostrich 材质的重复次数
-            [bodyMaterial, accentsMaterial].forEach(material => {
-                material.normalMap = normalMap;
-                material.roughness = materialConfig.roughness;
-                material.normalScale.set(0.6, 0.6); // 减小 ostrich 材质的法线强度
-                material.needsUpdate = true;
-            });  
-    } else {
-        // 其他材质保持原样
-        [bodyMaterial, accentsMaterial].forEach(material => {
-            material.normalMap = normalMap;
-            material.roughness = materialConfig.roughness;
-            material.normalScale.set(1, 1);
-            material.needsUpdate = true;
-        });
-    }
+    [bodyMaterial, accentsMaterial].forEach(material => {
+        material.normalMap = normalMap;
+        material.roughness = materialConfig.roughness;
+        material.normalScale.set(...settings.normalScale);
+        material.needsUpdate = true;
+    });
 
     // 重新加载当前模型以确保材质更新
     const currentModel = scene.children.find(child => child.type === 'Group' || child.type === 'Object3D');
@@ -679,6 +629,9 @@ function updateColor(colorType, hexColor) {
 }
 
 // 添加loadModel函数
+// 添加模型缓存
+const modelCache = new Map();
+
 function loadModel(modelType) {
     // 更新材质按钮状态
     const availableMaterials = CONFIG.models[modelType].availableMaterials;
@@ -696,6 +649,13 @@ function loadModel(modelType) {
         }
     });
 
+    if (modelCache.has(modelType)) {
+        const cachedModel = modelCache.get(modelType).clone();
+        updateModelMaterials(cachedModel);
+        scene.add(cachedModel);
+        return;
+    }
+
     // 加载新模型
     loader.load(CONFIG.models[modelType].path, (gltf) => {
         // 移除当前模型（如果存在）
@@ -703,6 +663,7 @@ function loadModel(modelType) {
             if (child.type === 'Group' || child.type === 'Object3D') {
                 scene.remove(child);
             }
+            
         });
 
         // 添加新模型
@@ -738,6 +699,8 @@ function loadModel(modelType) {
 
         scene.add(model);
 
+        
+
         // 选择第一个可用材质
         const firstAvailableMaterial = availableMaterials[0];
         if (firstAvailableMaterial) {
@@ -746,6 +709,7 @@ function loadModel(modelType) {
                 materialButton.click();
             }
         }
+        
     });
 }
 
