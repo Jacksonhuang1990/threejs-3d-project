@@ -416,23 +416,47 @@ function initializeEventListeners() {
         const availableColors = (materialConfig && materialConfig.availableColors && materialConfig.availableColors[colorType]) || CONFIG.colors[colorType].map(c => c.name);
         // 如果没有可用颜色配置，使用默认颜色列表
         console.log('Available colors for', colorType, ':', availableColors);
+        let selectedSwatch = null;
         CONFIG.colors[colorType].forEach(color => {
             if (availableColors.includes(color.name)) {
                 const swatch = document.createElement('div');
                 swatch.className = 'color-swatch';
                 swatch.style.backgroundColor = color.hex;
-                swatch.title = color.name;
+                
+                // 添加颜色名称的前两个字符
+                const colorCode = document.createElement('span');
+                colorCode.className = 'color-code';
+                colorCode.textContent = color.name.substring(0, 2);
+                swatch.appendChild(colorCode);
+                
+                const nameLabel = document.createElement('div');
+                nameLabel.className = 'color-name-label';
+                nameLabel.textContent = color.name;
+                nameLabel.style.display = 'none';
+                swatch.appendChild(nameLabel);
+
                 swatch.addEventListener('click', () => {
-                    preview.style.backgroundColor = color.hex;
-                    if (colorType === 'linings') {
-                        if (!currentLiningsMode) {
-                            savedLiningsColor = color.hex;
-                            updateLinings(null, color.hex);
+                    if (selectedSwatch === swatch) {
+                        // 第二次点击：应用颜色
+                        preview.style.backgroundColor = color.hex;
+                        if (colorType === 'linings') {
+                            if (!currentLiningsMode) {
+                                savedLiningsColor = color.hex;
+                                updateLinings(null, color.hex);
+                            }
+                        } else {
+                            updateColor(colorType, color.hex);
                         }
+                        palette.style.display = 'none';
+                        selectedSwatch = null;
                     } else {
-                        updateColor(colorType, color.hex);
+                        // 第一次点击：显示颜色名称
+                        if (selectedSwatch) {
+                            selectedSwatch.querySelector('.color-name-label').style.display = 'none';
+                        }
+                        nameLabel.style.display = 'block';
+                        selectedSwatch = swatch;
                     }
-                    palette.style.display = 'none';
                 });
                 palette.appendChild(swatch);
             }
@@ -460,6 +484,12 @@ function initializeEventListeners() {
                     swatch.className = 'color-swatch';
                     swatch.style.backgroundColor = color.hex;
                     swatch.title = color.name;
+                    
+                    // 添加颜色名称的前两个字符
+                    const colorCode = document.createElement('span');
+                    colorCode.className = 'color-code';
+                    colorCode.textContent = color.name.substring(0, 2);
+                    swatch.appendChild(colorCode);
                     swatch.addEventListener('click', () => {
                         preview.style.backgroundColor = color.hex;
                         if (colorType === 'linings') {
