@@ -73,8 +73,8 @@ const CONFIG = {
             normalMap: '/texture/chevre-normal.png',
             roughness: 0.5,
             availableColors: {
-                body: ['12 NATA', '18 ETOUPE', '2H KRAFT', '36 BRIQUE', '28 CARAMEL', '89 NOIR', '55 ROUGE H', 'S4 DEEP BLUE', '7U BLEU NAVY', '71 BLEU FRANCE', '3I VERT CRIQUET'],
-                accent: ['12 NATA', '18 ETOUPE', '2H KRAFT', '36 BRIQUE', '28 CARAMEL', '89 NOIR', '55 ROUGE H', 'S4 DEEP BLUE', '7U BLEU NAVY', '71 BLEU FRANCE', '3I VERT CRIQUET']
+                body: ['I2 NATA', '18 ETOUPE', '2H KRAFT', '36 BRIQUE', '28 CARAMEL', '89 NOIR', '55 ROUGE H', 'S4 DEEP BLUE', '7U BLEU NAVY', '71 BLEU FRANCE', '3I VERT CRIQUET'],
+                accent: ['I2 NATA', '18 ETOUPE', '2H KRAFT', '36 BRIQUE', '28 CARAMEL', '89 NOIR', '55 ROUGE H', 'S4 DEEP BLUE', '7U BLEU NAVY', '71 BLEU FRANCE', '3I VERT CRIQUET']
             }
         },
         alligator: {
