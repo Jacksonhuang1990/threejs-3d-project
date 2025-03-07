@@ -172,7 +172,7 @@ const CONFIG = {
         ],
         linings: [
             { name: '80 GREIS PERLE', hex: '#9A9C97' },
-            { name: '89 NOIR', hex: '#303030' },
+            { name: '89 NOIR', hex: '#202020' },
             { name: '37 GOLD', hex: '#9D6E57' },
             { name: '9R LIME', hex: '#EDE54E' },
             { name: '73 BLEU SAPHIR', hex: '#3B4980' },
@@ -278,6 +278,100 @@ pointLight5.intensity = 100;
 pointLight5.position.set(-5,0.1,-7); 
 scene.add(pointLight5);
 
+// 创建灯光控制面板
+const lightControls = document.createElement('div');
+lightControls.className = 'light-controls';
+document.body.appendChild(lightControls);
+
+// 添加展开/收起按钮
+const toggleButton = document.createElement('button');
+toggleButton.className = 'light-controls-toggle';
+toggleButton.innerHTML = '💡';
+toggleButton.onclick = () => lightControls.classList.toggle('expanded');
+lightControls.appendChild(toggleButton);
+
+// 为每个灯光创建控制项
+const lights = [pointLight1, pointLight2, pointLight3, pointLight4, pointLight5];
+const lightNames = ['Main Light', 'Bottom Light', 'Right Light', 'Left Light', 'Back Light'];
+
+// Store default light settings
+const defaultLightSettings = [
+    { intensity: 220, color: '#ffffff' },
+    { intensity: 100, color: '#ffffff' },
+    { intensity: 100, color: '#ffffff' },
+    { intensity: 100, color: '#ffffff' },
+    { intensity: 100, color: '#ffffff' }
+];
+
+lights.forEach((light, index) => {
+    const controlItem = document.createElement('div');
+    controlItem.className = 'light-control-item';
+
+    const title = document.createElement('h3');
+    title.textContent = lightNames[index];
+    controlItem.appendChild(title);
+
+    // Intensity control
+    const intensityContainer = document.createElement('div');
+    intensityContainer.className = 'slider-container';
+    const intensitySlider = document.createElement('input');
+    intensitySlider.type = 'range';
+    intensitySlider.min = '0';
+    intensitySlider.max = '500';
+    intensitySlider.value = light.intensity;
+    const intensityValue = document.createElement('span');
+    intensityValue.className = 'intensity-value';
+    intensityValue.textContent = light.intensity;
+
+    intensitySlider.oninput = (e) => {
+        const value = parseInt(e.target.value);
+        light.intensity = value;
+        intensityValue.textContent = value;
+    };
+
+    intensityContainer.appendChild(intensitySlider);
+    intensityContainer.appendChild(intensityValue);
+    controlItem.appendChild(intensityContainer);
+
+    // Color control
+    const colorContainer = document.createElement('div');
+    colorContainer.className = 'slider-container';
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.value = '#ffffff';
+
+    colorPicker.oninput = (e) => {
+        light.color.setStyle(e.target.value);
+    };
+
+    colorContainer.appendChild(colorPicker);
+    controlItem.appendChild(colorContainer);
+
+    lightControls.appendChild(controlItem);
+});
+
+// Add reset button
+const resetButton = document.createElement('button');
+resetButton.className = 'light-controls-reset';
+resetButton.textContent = 'Reset Lights';
+resetButton.onclick = () => {
+    lights.forEach((light, index) => {
+        const defaultSetting = defaultLightSettings[index];
+        light.intensity = defaultSetting.intensity;
+        light.color.setStyle(defaultSetting.color);
+        
+        // Update UI
+        const controlItem = lightControls.children[index + 1];
+        const intensitySlider = controlItem.querySelector('input[type="range"]');
+        const intensityValue = controlItem.querySelector('.intensity-value');
+        const colorPicker = controlItem.querySelector('input[type="color"]');
+        
+        intensitySlider.value = defaultSetting.intensity;
+        intensityValue.textContent = defaultSetting.intensity;
+        colorPicker.value = defaultSetting.color;
+    });
+};
+lightControls.appendChild(resetButton);
 
 // 渲染器设置
 const renderer = new THREE.WebGLRenderer({
